@@ -19,7 +19,7 @@ app.add_middleware(
 
 
 @app.get('/')
-async def unshorten_url(url: Optional[str] = None):
+async def receive_url(url: Optional[str] = None):
     if url is None:
         return {"error": "no url provided"}
 
