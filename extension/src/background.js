@@ -7,8 +7,6 @@ browser.contextMenus.create({
         title: "Unshorten link",
         contexts: ["link"],
     },
-    // See https://extensionworkshop.com/documentation/develop/manifest-v3-migration-guide/#event-pages-and-backward-compatibility
-    // for information on the purpose of this error capture.
     () => void browser.runtime.lastError,
 );
 
@@ -34,8 +32,12 @@ function unshortenUrl(linkUrl) {
 
     fetch("http://localhost:8000/?url=" + linkUrl)
     .then(res => {
-        if (res.ok) {
-            console.log(res);
+        if (!res.ok) {
+            console.log("error fetching result");
         }
+        return res.json();
+    })
+    .then(data => {
+        console.log(data);
     });
 }
