@@ -28,8 +28,6 @@ function getDomainFromUrl(linkUrl) {
 }
 
 function unshortenUrl(linkUrl) {
-    console.log(linkUrl);
-
     fetch("http://localhost:8000/?url=" + linkUrl)
     .then(res => {
         if (!res.ok) {
@@ -37,7 +35,9 @@ function unshortenUrl(linkUrl) {
         }
         return res.json();
     })
-    .then(data => {
-        console.log(data);
+    .then(unshortenedUrl => {
+        console.log("unshortened: " + unshortenedUrl)
+        navigator.clipboard.writeText(unshortenedUrl)
+        .catch(err => console.error("couldn't copy to clipboard", err));
     });
 }
