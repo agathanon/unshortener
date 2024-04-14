@@ -3,7 +3,7 @@ import re
 import requests
 
 
-def unshorten_twitter(url):
+def unshorten_twitter(url: str):
     """Retrieve the actual URL behind a Twitter URL."""
     pattern = re.compile(r"<title>(.*?)<\/title>")
 
