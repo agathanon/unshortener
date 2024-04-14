@@ -1,8 +1,9 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+"""Unshorten API"""
 from typing import Optional
 from urllib.parse import urlparse
-from unshorten import unshorten_twitter
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from unshorteners import unshorten_twitter
 
 UNSHORTENERS = {
     't.co': unshorten_twitter
@@ -20,12 +21,12 @@ app.add_middleware(
 
 @app.get('/')
 async def receive_url(url: Optional[str] = None):
+    """Receives a URL to unshorten"""
     if url is None:
         return {"error": "no url provided"}
 
     domain = urlparse(url).netloc
-
     if domain not in UNSHORTENERS:
         return {"error": f"cannot unshorten {domain}"}
-    else:
-        return UNSHORTENERS[domain](url)
+
+    return UNSHORTENERS[domain](url)
