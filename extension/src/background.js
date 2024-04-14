@@ -1,5 +1,6 @@
 const shortenerDomains = [
-    "t.co"
+    "t.co",
+    "tinyurl.com"
 ];
 
 browser.contextMenus.create({

@@ -3,10 +3,11 @@ from typing import Optional
 from urllib.parse import urlparse
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from unshorteners import unshorten_twitter
+from unshorteners import unshorten_twitter, unshorten_tinyurl
 
 UNSHORTEN = {
-    't.co': unshorten_twitter
+    't.co': unshorten_twitter,
+    'tinyurl.com': unshorten_tinyurl
 }
 
 CACHE = {}
@@ -32,9 +33,11 @@ async def receive_url(url: Optional[str] = None):
         return {"error": f"cannot unshorten {domain}"}
 
     if url in CACHE:
-        unshortened = CACHE[url]
-    else:
-        unshortened = UNSHORTEN[domain](url)
-        CACHE[url] = unshortened
+        return CACHE[url]
 
-    return unshortened
+    result = UNSHORTEN[domain](url)
+    if result:
+        CACHE[url] = result
+        return result
+
+    return {"error": f"server error"}
