@@ -1,6 +1,11 @@
 # Unshorten
 Firefox Extension and API server for revealing links behind shortened URLs.
 
+**Supported sites**:
+- t.co
+- tinyurl.com
+
+
 ## Usage
 In order to deal with CORS, Unshorten must send links to a resolver API. 
 
@@ -17,7 +22,3 @@ Build the extension and import into Firefox. Right click on a link and choose
 cd extension
 make zip
 ```
-
-## Supported Sites
-- t.co
-- tinyurl.com
