@@ -9,6 +9,8 @@ UNSHORTEN = {
     't.co': unshorten_twitter
 }
 
+CACHE = {}
+
 app = FastAPI(docs_url=None, redoc_url=None)
 app.add_middleware(
     CORSMiddleware,
@@ -29,4 +31,10 @@ async def receive_url(url: Optional[str] = None):
     if domain not in UNSHORTEN:
         return {"error": f"cannot unshorten {domain}"}
 
-    return UNSHORTEN[domain](url)
+    if url in CACHE:
+        unshortened = CACHE[url]
+    else:
+        unshortened = UNSHORTEN[domain](url)
+        CACHE[url] = unshortened
+
+    return unshortened
