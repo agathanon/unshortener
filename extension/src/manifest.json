@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Unshortener",
-  "version": "0.3",
+  "version": "0.2",
 
   "description": "Unshorten links from Twitter.",
 
