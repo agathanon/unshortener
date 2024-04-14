@@ -1,4 +1,4 @@
-# Unshortener
+# Unshortener Extension
 A Firefox extension to reveal links behind URL shorteners like Twitter and TinyURL.
 
 **Supported sites:**
