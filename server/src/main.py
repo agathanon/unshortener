@@ -40,4 +40,4 @@ async def receive_url(url: Optional[str] = None):
         CACHE[url] = result
         return result
 
-    return {"error": f"server error"}
+    return {"error": "server error"}

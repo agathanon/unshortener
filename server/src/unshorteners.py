@@ -1,7 +1,7 @@
 """Unshortening functions"""
 import re
-import requests
 from typing import Optional
+import requests
 
 
 def unshorten_tinyurl(url: str) -> Optional[str]:
