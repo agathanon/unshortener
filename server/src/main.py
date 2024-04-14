@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from unshorteners import unshorten_twitter
 
-UNSHORTENERS = {
+UNSHORTEN = {
     't.co': unshorten_twitter
 }
 
@@ -26,7 +26,7 @@ async def receive_url(url: Optional[str] = None):
         return {"error": "no url provided"}
 
     domain = urlparse(url).netloc
-    if domain not in UNSHORTENERS:
+    if domain not in UNSHORTEN:
         return {"error": f"cannot unshorten {domain}"}
 
-    return UNSHORTENERS[domain](url)
+    return UNSHORTEN[domain](url)
